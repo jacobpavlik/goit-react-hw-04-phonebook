@@ -1,0 +1,19 @@
+.listItemContainer {
+  display: flex;
+  /* flex-direction: column; */
+}
+.contactName {
+  font-size: 18px;
+  margin-right: 10px;
+}
+.deleteButton {
+  max-height: 25px;
+  cursor: pointer;
+  align-self: center;
+  border-radius: 5px;
+
+  &:hover {
+    color: red;
+    border-color: red;
+  }
+}

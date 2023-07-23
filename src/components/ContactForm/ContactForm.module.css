@@ -1,0 +1,35 @@
+.formContainer {
+  /* margin: 10px; */
+  padding: 10px;
+  border: 1px solid gray;
+  max-width: 500px;
+}
+.formContact {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+}
+.formLabel {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+.formInput {
+  margin-bottom: 5px;
+  border: 1px solid gray;
+  font-size: 15px;
+  padding: 5px;
+}
+.formButton {
+  border-color: transparent;
+  padding: 5px 12px;
+  border-radius: 5px;
+  max-width: 120px;
+  background-color: rgba(0, 0, 255, 0.7);
+  margin-top: 20px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: blue;
+    color: blanchedalmond;
+  }
+}
