@@ -6,7 +6,7 @@ export const ContactList = ({ contacts, deleteContact, filter }) => {
   // export class ContactList extends Component {
   //   render() {
   //     const { contacts, deleteContact, filter } = this.props;
-  //     console.log('contacts.length', contacts.length);
+  console.log('contacts.length', contacts.length);
   if (contacts.length === 0) {
     return <p className={css.info}>Contacts list is empty</p>;
   } else {
@@ -25,6 +25,7 @@ export const ContactList = ({ contacts, deleteContact, filter }) => {
         </div>
       );
     } else {
+      // console.log('contacts-to-filter', contacts);
       const filteredContacts = contacts.filter(contact =>
         contact.name.toLowerCase().includes(filter.toLowerCase())
       );

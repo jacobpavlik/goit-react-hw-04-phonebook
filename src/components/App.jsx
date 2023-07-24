@@ -1,69 +1,98 @@
-import { Component } from 'react';
+// import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import { ContactList } from './ContactList/ContactList';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/filter';
 
-export class App extends Component {
-  state = {
+export const App = () => {
+  // const [contacts, setContacts] = useState([])
+  // const [filer, setFilter] = useState('')
+
+  const [state, setState] = useState({
     contacts: [],
     filter: '',
-  };
+  });
 
-  handleFilter = e => {
+  // export class App extends Component {
+  //   state = {
+  //     contacts: [],
+  //     filter: '',
+  //   };
+
+  const handleFilter = e => {
     const { name, value } = e.target;
-    this.setState(prevState => ({ ...prevState, [name]: value }));
+    setState(prevState => ({ ...prevState, [name]: value }));
     console.log('handleFilter', e.target.value);
   };
 
-  addContact = newContact => {
+  const addContact = newContact => {
     console.log('newContact', newContact);
     if (
       newContact.name !== '' &&
-      this.state.contacts.find(contact => contact.name === newContact.name)
+      state.contacts.find(contact => contact.name === newContact.name)
     ) {
       alert(`${newContact.name} is already in contacts.`);
       return;
     }
-    this.setState(prevState => ({
+    // const contactsLocal = [...contacts, newContact]
+    // setContacts([...contactsLocal]);
+
+    setState(prevState => ({
       contacts: [...prevState.contacts, newContact],
     }));
-    console.log('Dodajemy nasz kontakt', this.state.contacts);
+    console.log('Dodajemy nasz kontakt', state.contacts);
   };
 
-  deleteContact = index => {
+  const deleteContact = index => {
     console.log('Usuwanie kontaktu', index);
-    this.setState(prevState => {
+    setState(prevState => {
       const updateContacts = [...prevState.contacts];
       updateContacts.splice(index, 1);
       return { contacts: updateContacts };
     });
   };
-  componentDidMount() {
+
+  useEffect(() => {
     if ('contacts' in localStorage) {
       const localStorageContacts = localStorage.getItem('contacts');
       console.log(localStorageContacts);
-      this.setState({
+      setState({
         contacts: JSON.parse(localStorageContacts),
       });
     }
-  }
-  componentDidUpdate() {
-    console.log('componentDidUpdate', this.state.contacts);
-    localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-  }
-  render() {
-    return (
-      <div>
-        <h1>Phonebook</h1>
-        <ContactForm addContact={this.addContact} />
-        <h2>Contacts </h2>
-        <Filter handleFilter={this.handleFilter} filter={this.state.filter} />
-        <ContactList
-          contacts={this.state.contacts}
-          deleteContact={this.deleteContact}
-          filter={this.state.filter}
-        />
-      </div>
-    );
-  }
-}
+  }, []);
+
+  // componentDidMount() {
+  //     if ('contacts' in localStorage) {
+  //       const localStorageContacts = localStorage.getItem('contacts');
+  //       console.log(localStorageContacts);
+  //       setState({
+  //         contacts: JSON.parse(localStorageContacts),
+  //       });
+  //     }
+  //   }
+
+  useEffect(() => {
+    console.log('componentDidUpdate', state.contacts);
+    localStorage.setItem('contacts', JSON.stringify(state.contacts));
+  }, [state.contacts]);
+
+  // componentDidUpdate() {
+  //     console.log('componentDidUpdate', this.state.contacts);
+  //     localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+  //   }
+
+  return (
+    <div>
+      <h1>Phonebook</h1>
+      <ContactForm addContact={addContact} />
+      <h2>Contacts </h2>
+      <Filter handleFilter={handleFilter} filter={state.filter} />
+      <ContactList
+        contacts={state.contacts}
+        deleteContact={deleteContact}
+        filter={state.filter}
+      />
+    </div>
+  );
+}; // tu jest koniec funkcji App
