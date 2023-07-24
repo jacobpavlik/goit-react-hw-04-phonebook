@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
 
+let idNanoidLabel1 = nanoid();
+let idNanoidLabel2 = nanoid();
+
 export const ContactForm = ({ addContact }) => {
   const [state, setState] = useState({
     name: '',
     number: '',
   });
-
-  let idNanoid = nanoid();
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -21,22 +22,21 @@ export const ContactForm = ({ addContact }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    idNanoid = nanoid();
+    const idNanoid = nanoid();
     addContact({ ...state, id: idNanoid });
-    console.log(`Dane zostały wysłane ${JSON.stringify(state)}`);
     setState({ name: '', number: '' });
   };
 
   return (
     <div className={css.formContainer}>
       <form className={css.formContact} onSubmit={handleSubmit}>
-        <label className={css.formLabel} htmlFor={idNanoid}>
+        <label className={css.formLabel} htmlFor={idNanoidLabel1}>
           Name
         </label>
         <input
           className={css.formInput}
           onChange={handleChange}
-          id={idNanoid}
+          id={idNanoidLabel1}
           value={state.name}
           type="text"
           name="name"
@@ -44,13 +44,13 @@ export const ContactForm = ({ addContact }) => {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
-        <label className={css.formLabel} htmlFor={idNanoid}>
+        <label className={css.formLabel} htmlFor={idNanoidLabel2}>
           Number
         </label>
         <input
           className={css.formInput}
           onChange={handleChange}
-          id={idNanoid}
+          id={idNanoidLabel2}
           value={state.number}
           type="tel"
           name="number"
