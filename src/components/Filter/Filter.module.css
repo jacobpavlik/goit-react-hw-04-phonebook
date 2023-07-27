@@ -1,6 +1,3 @@
-.filterContainer {
-  /* display: flex; */
-}
 .filterLabel {
   display: flex;
   flex-direction: column;
