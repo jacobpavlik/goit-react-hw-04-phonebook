@@ -21,4 +21,4 @@ export const Filter = ({ handleFilter, filter }) => (
 Filter.propTypes = {
   filter: PropTypes.string,
 };
-// github nie przyjął ostatniego pusha- ??
+// stworzyłem komponent filter.jsx, zamiast Filter.jsx; w trakcie pisania zorientowałem się i poprawiłem nazwę, ale github już jej nie poprawił

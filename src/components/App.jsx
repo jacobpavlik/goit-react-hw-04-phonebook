@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { ContactList } from './ContactList/ContactList';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
+import css from './App.module.css';
 
 export const App = () => {
   const [contacts, setContacts] = useState([]);
@@ -45,7 +46,7 @@ export const App = () => {
   }, []);
 
   return (
-    <div>
+    <div className={css.container}>
       <h1>Phonebook</h1>
       <ContactForm addContact={addContact} />
       <h2>Contacts </h2>
