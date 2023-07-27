@@ -21,3 +21,4 @@ export const Filter = ({ handleFilter, filter }) => (
 Filter.propTypes = {
   filter: PropTypes.string,
 };
+// github nie przyjął ostatniego pusha- ??
